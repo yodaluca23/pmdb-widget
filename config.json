@@ -39,15 +39,29 @@
         }
       }
     },
-    "add_widget_preview": {
-      "layout": "add_widget_preview_hero",
+    "mini_profile": {
+      "layout": "mini_profile_hero_stat",
       "components": {
+        "stat": {
+          "fields": {
+            "text": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "heroTitle"
+            },
+            "label": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "subtitle"
+            }
+          }
+        },
         "hero_image": {
           "fields": {
             "image": {
-              "value_type": "application_asset",
+              "value_type": "data",
               "presentation_type": "image",
-              "value": "bRwnj8WEKBCvmfeUNOukJPwB43K"
+              "value": "miniImage"
             }
           }
         }
@@ -99,29 +113,15 @@
         }
       }
     },
-    "mini_profile": {
-      "layout": "mini_profile_hero_stat",
+    "add_widget_preview": {
+      "layout": "add_widget_preview_hero",
       "components": {
-        "stat": {
-          "fields": {
-            "text": {
-              "value_type": "data",
-              "presentation_type": "text",
-              "value": "heroTitle"
-            },
-            "label": {
-              "value_type": "custom_string",
-              "presentation_type": "text",
-              "value": ""
-            }
-          }
-        },
         "hero_image": {
           "fields": {
             "image": {
-              "value_type": "data",
+              "value_type": "application_asset",
               "presentation_type": "image",
-              "value": "heroImage"
+              "value": "bRwnj8WEKBCvmfeUNOukJPwB43K"
             }
           }
         }

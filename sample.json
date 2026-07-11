@@ -9,6 +9,13 @@
         }
       },
       {
+        "type": 3,
+        "name": "miniImage",
+        "value": {
+          "url": "https://www.themoviedb.org/t/p/w1280/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg"
+        }
+      },
+      {
         "type": 1,
         "name": "heroTitle",
         "value": "Obsession (2026)"

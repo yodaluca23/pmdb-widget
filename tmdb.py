@@ -2,15 +2,18 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
+from urllib.parse import quote
 
 load_dotenv()
 tmdb = os.getenv("tmdb")
 dwif = os.getenv("dwif")
 
-if dwif is None:
-    dwif = ""
-else:
-    dwif = dwif + "/api/process?url="
+def process_dwif(poster):
+    poster = "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png"
+    if dwif:
+        poster = dwif + "/api/process?radius=73&url=" + quote(poster)
+
+    return poster
 
 def get_progress_string(progress, runtime):
     #print(f"Calculating progress string with progress: {progress}, runtime: {runtime}")
@@ -35,7 +38,7 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
 
         runtime = data.get("runtime") or pmdb_runtime
         progress_string = get_progress_string(progress, runtime)
-        poster = "www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "")
+        poster = "www.themoviedb.org/t/p/w1280" + data.get("poster_path", "")
 
         new_data = {
             "data": {
@@ -44,7 +47,14 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
                     "type": 3,
                     "name": "heroImage",
                     "value": {
-                        "url": dwif + "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png&radius=73"
+                        "url": process_dwif(poster)
+                    }
+                },
+                {
+                    "type": 3,
+                    "name": "miniImage",
+                    "value": {
+                        "url": "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png"
                     }
                 },
                 {
@@ -91,7 +101,7 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
         poster = "www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "")
         for season_info in seasons:
             if season_info.get("season_number") == season:
-                poster = "www.themoviedb.org/t/p/w1280/" + season_info["poster_path"] if season_info.get("poster_path") else poster
+                poster = "www.themoviedb.org/t/p/w1280" + season_info["poster_path"] if season_info.get("poster_path") else poster
                 break
 
         new_data = {
@@ -101,7 +111,14 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
                         "type": 3,
                         "name": "heroImage",
                         "value": {
-                            "url": dwif + "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png&radius=73"
+                            "url": process_dwif(poster)
+                        }
+                    },
+                    {
+                        "type": 3,
+                        "name": "miniImage",
+                        "value": {
+                        "url": "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png"
                         }
                     },
                     {
