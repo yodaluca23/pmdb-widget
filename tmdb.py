@@ -86,7 +86,12 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
 
         runtime = episode_data.get("runtime") or pmdb_runtime
         progress_string = get_progress_string(progress, runtime)
-        poster = data.get("seasons", [{}])[season - 1].get("poster_path", "") or data.get("poster_path", "")
+        seasons = data.get("seasons", [{}])
+        poster = data.get("poster_path", "")
+        for season_info in seasons:
+            if season_info.get("season_number") == season:
+                poster = season_info["poster_path"] if season_info.get("poster_path") else poster
+                break
 
         new_data = {
             "data": {
