@@ -1,0 +1,40 @@
+{
+  "data": {
+    "dynamic": [
+      {
+        "type": 3,
+        "name": "heroImage",
+        "value": {
+          "url": "https://www.themoviedb.org/t/p/w1280/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg"
+        }
+      },
+      {
+        "type": 1,
+        "name": "heroTitle",
+        "value": "Obsession (2026)"
+      },
+      {
+        "type": 1,
+        "name": "subtitle",
+        "value": "Be careful who you wish for…"
+      },
+      {
+        "type": 3,
+        "name": "progressImage",
+        "value": {
+          "url": "https://media.themoviedb.org/t/p/w440_and_h660_face/62X0LT0a4VtCkcs0saFzdxNfDyV.jpg"
+        }
+      },
+      {
+        "type": 1,
+        "name": "progressString",
+        "value": "1h 13m / 1h 49m"
+      },
+      {
+        "type": 2,
+        "name": "progressBar",
+        "value": 0.67
+      }
+    ]
+  }
+}

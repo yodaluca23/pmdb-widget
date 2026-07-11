@@ -1,0 +1,131 @@
+{
+  "_type": "discord_widget_config",
+  "surfaces": {
+    "widget_bottom": {
+      "layout": "widget_bottom_progress",
+      "components": {
+        "progress": {
+          "fields": {
+            "current": {
+              "value_type": "data",
+              "presentation_type": "number",
+              "value": "progressBar"
+            },
+            "max": {
+              "value_type": "data",
+              "presentation_type": "number",
+              "value": "100"
+            }
+          }
+        },
+        "objective": {
+          "fields": {
+            "description": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "progressString"
+            },
+            "image": {
+              "value_type": "application_asset",
+              "presentation_type": "image",
+              "value": "Popcorn_svg"
+            },
+            "name": {
+              "value_type": "custom_string",
+              "presentation_type": "text",
+              "value": "Watch Progress"
+            }
+          }
+        }
+      }
+    },
+    "add_widget_preview": {
+      "layout": "add_widget_preview_hero",
+      "components": {
+        "hero_image": {
+          "fields": {
+            "image": {
+              "value_type": "application_asset",
+              "presentation_type": "image",
+              "value": "bRwnj8WEKBCvmfeUNOukJPwB43K"
+            }
+          }
+        }
+      }
+    },
+    "widget_top": {
+      "layout": "widget_top_hero",
+      "components": {
+        "title": {
+          "fields": {
+            "text": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "heroTitle"
+            }
+          }
+        },
+        "subtitle_1": {
+          "fields": {
+            "text": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "subtitle"
+            },
+            "label": {
+              "value_type": "custom_string",
+              "presentation_type": "text",
+              "value": ""
+            }
+          }
+        },
+        "hero_image": {
+          "fields": {
+            "image": {
+              "value_type": "data",
+              "presentation_type": "image",
+              "value": "heroImage"
+            }
+          }
+        },
+        "subtitle_2": {
+          "fields": {
+            "text": {
+              "value_type": "custom_string",
+              "presentation_type": "text",
+              "value": "Tracking with the Public Meta DataBase."
+            }
+          }
+        }
+      }
+    },
+    "mini_profile": {
+      "layout": "mini_profile_hero_stat",
+      "components": {
+        "stat": {
+          "fields": {
+            "text": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "heroTitle"
+            },
+            "label": {
+              "value_type": "custom_string",
+              "presentation_type": "text",
+              "value": ""
+            }
+          }
+        },
+        "hero_image": {
+          "fields": {
+            "image": {
+              "value_type": "data",
+              "presentation_type": "image",
+              "value": "heroImage"
+            }
+          }
+        }
+      }
+    }
+  }
+}
