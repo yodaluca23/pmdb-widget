@@ -35,6 +35,7 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
 
         runtime = data.get("runtime") or pmdb_runtime
         progress_string = get_progress_string(progress, runtime)
+        poster = "www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "")
 
         new_data = {
             "data": {
@@ -43,7 +44,7 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
                     "type": 3,
                     "name": "heroImage",
                     "value": {
-                        "url": dwif + "https://wsrv.nl/?url=https://www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "") + "&w=1000&h=1000&fit=cover&a=attention&output=png"
+                        "url": dwif + "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png&radius=73"
                     }
                 },
                 {
@@ -87,10 +88,10 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
         runtime = episode_data.get("runtime") or pmdb_runtime
         progress_string = get_progress_string(progress, runtime)
         seasons = data.get("seasons", [{}])
-        poster = data.get("poster_path", "")
+        poster = "www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "")
         for season_info in seasons:
             if season_info.get("season_number") == season:
-                poster = season_info["poster_path"] if season_info.get("poster_path") else poster
+                poster = "www.themoviedb.org/t/p/w1280/" + season_info["poster_path"] if season_info.get("poster_path") else poster
                 break
 
         new_data = {
@@ -100,7 +101,7 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
                         "type": 3,
                         "name": "heroImage",
                         "value": {
-                            "url": dwif + "https://wsrv.nl/?url=https://www.themoviedb.org/t/p/w1280/" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png"
+                            "url": dwif + "https://wsrv.nl/?url=" + poster + "&w=1000&h=1000&fit=cover&a=attention&output=png&radius=73"
                         }
                     },
                     {
