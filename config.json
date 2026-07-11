@@ -39,29 +39,15 @@
         }
       }
     },
-    "mini_profile": {
-      "layout": "mini_profile_hero_stat",
+    "add_widget_preview": {
+      "layout": "add_widget_preview_hero",
       "components": {
-        "stat": {
-          "fields": {
-            "text": {
-              "value_type": "data",
-              "presentation_type": "text",
-              "value": "heroTitle"
-            },
-            "label": {
-              "value_type": "data",
-              "presentation_type": "text",
-              "value": "subtitle"
-            }
-          }
-        },
         "hero_image": {
           "fields": {
             "image": {
-              "value_type": "data",
+              "value_type": "application_asset",
               "presentation_type": "image",
-              "value": "miniImage"
+              "value": "bRwnj8WEKBCvmfeUNOukJPwB43K"
             }
           }
         }
@@ -113,15 +99,24 @@
         }
       }
     },
-    "add_widget_preview": {
-      "layout": "add_widget_preview_hero",
+    "mini_profile": {
+      "layout": "mini_profile_hero_stat",
       "components": {
         "hero_image": {
           "fields": {
             "image": {
-              "value_type": "application_asset",
+              "value_type": "data",
               "presentation_type": "image",
-              "value": "bRwnj8WEKBCvmfeUNOukJPwB43K"
+              "value": "miniImage"
+            }
+          }
+        },
+        "stat": {
+          "fields": {
+            "text": {
+              "value_type": "data",
+              "presentation_type": "text",
+              "value": "heroTitle"
             }
           }
         }
