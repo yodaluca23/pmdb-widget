@@ -19,7 +19,7 @@ def update(pmdb_key, user_id):
     if pmdb_data:
         if old_data is not None and pmdb_data == old_data:
             print("No changes detected. Widget not updated.")
-            return
+            return False
         else:
             old_data = pmdb_data
 
@@ -35,11 +35,12 @@ def update(pmdb_key, user_id):
             new_data = generate_new_tv_data(tmdb_id, progress, pmdb_data.get("runtime_ms", 0)/60000, season, episode)
         else:
             print(f"Unsupported media type: {media_type}")
-            return
+            return False
 
         if new_data:
             response = update_widget(user_id, new_data)
             print(f"Widget updated for user {user_id}. Response: {response.status_code}")
+            return True
         else:
             print(f"No new data generated for TMDB ID: {tmdb_id}")
     else:
@@ -47,10 +48,23 @@ def update(pmdb_key, user_id):
 
 if __name__ == "__main__":
 
+    notUpdatedCount = 0
+    sleepCounter = 20
     while True:
         try:
-            update(test_pmdb_key, test_user)
+            updated = update(test_pmdb_key, test_user)
+            if updated:
+                notUpdatedCount = 0
+
+                if sleepCounter > 30:
+                    print("Updates detected. Resetting sleep time to 15 seconds.")
+                sleepCounter = 20
+            else:
+                notUpdatedCount += 1
         except Exception as e:
             print(f"Error occurred: {e}")
-            
-        sleep(15)  # Wait for 15 seconds before the next update
+
+        if (notUpdatedCount >= 15) and (sleepCounter < 30):
+            sleepCounter = 300  # Increase sleep time to 5 minutes after 15 consecutive no updates
+            print("No updates for 15 consecutive checks. Increasing sleep time to 5 minutes.")
+        sleep(sleepCounter)  # Wait for the current sleep time before the next update
