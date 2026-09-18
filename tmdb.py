@@ -68,6 +68,16 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
                     "type": 2,
                     "name": "progressBar",
                     "value": progress / 100
+                },
+                {
+                    "type": 1,
+                    "name": "episode",
+                    "value": " "
+                },
+                {
+                    "type": 1,
+                    "name": "episodeDetails",
+                    "value": " "
                 }
                 ]
             }
@@ -88,9 +98,12 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
             return None
 
         runtime = episode_data.get("runtime") or pmdb_runtime
+        episode_title = episode_data.get("name", "")
         progress_string = get_progress_string(progress, runtime)
         seasons = data.get("seasons", [{}])
         poster = "www.themoviedb.org/t/p/w1280/" + data.get("poster_path", "")
+        tagline = data.get("tagline", "")
+        tagline_exists = bool(tagline and tagline.strip())
         for season_info in seasons:
             if season_info.get("season_number") == season:
                 poster = "www.themoviedb.org/t/p/w1280" + season_info["poster_path"] if season_info.get("poster_path") else poster
@@ -116,12 +129,12 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
                     {
                         "type": 1,
                         "name": "heroTitle",
-                        "value": data.get("name", "") + f": S{season}E{episode}" + " (" + data.get("first_air_date", "")[:4] + ")"
+                        "value": data.get("name", "") + " (" + data.get("first_air_date", "")[:4] + ")"
                     },
                     {
                         "type": 1,
                         "name": "subtitle",
-                        "value": f'"{data.get("tagline", "")}"' if data.get("tagline") else episode_data.get("name", "")
+                        "value": f'"{tagline}"' if tagline_exists else episode_title
                     },
                     {
                         "type": 1,
@@ -132,6 +145,16 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
                         "type": 2,
                         "name": "progressBar",
                         "value": progress / 100
+                    },
+                    {
+                        "type": 1,
+                        "name": "episode",
+                        "value": episode_title if tagline_exists else f"Season {season} Episode {episode}"
+                    },
+                    {
+                        "type": 1,
+                        "name": "episodeDetails",
+                        "value": f"Season {season} Episode {episode}" if tagline_exists else " "
                     }
                 ]
             }

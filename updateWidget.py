@@ -18,5 +18,5 @@ def update_widget(user_id, new_data):
     response = requests.patch(url, headers=headers, json=new_data)
     return response
 
-#update_widget(test_user, generate_new_movie_data(1083381, 23))
+#update_widget(test_user, generate_new_movie_data(1083381, 23, 120))
 #update_widget(test_user, generate_new_tv_data(94997, 34, 300000, 2, 5))
