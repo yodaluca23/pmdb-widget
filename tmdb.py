@@ -3,9 +3,11 @@ import requests
 import os
 from dotenv import load_dotenv
 from urllib.parse import quote
+from fanart import fetch_fanart_poster
 
 load_dotenv()
 tmdb = os.getenv("tmdb")
+fanart_api_key = os.getenv("fanart_api_key")
 
 def get_progress_string(progress, runtime):
     #print(f"Calculating progress string with progress: {progress}, runtime: {runtime}")
@@ -31,6 +33,10 @@ def generate_new_movie_data(tmdb_id, progress, pmdb_runtime):
         runtime = data.get("runtime") or pmdb_runtime
         progress_string = get_progress_string(progress, runtime)
         poster = "www.themoviedb.org/t/p/w1280" + data.get("poster_path", "")
+        if fanart_api_key:
+            fanart_poster = fetch_fanart_poster(tmdb_id, isTv=False)
+            if fanart_poster:
+                poster = fanart_poster
 
         new_data = {
             "data": {
@@ -108,6 +114,11 @@ def generate_new_tv_data(tmdb_id, progress, pmdb_runtime, season, episode):
             if season_info.get("season_number") == season:
                 poster = "www.themoviedb.org/t/p/w1280" + season_info["poster_path"] if season_info.get("poster_path") else poster
                 break
+
+        if fanart_api_key:
+            fanart_poster = fetch_fanart_poster(tmdb_id, isTv=True, season=season)
+            if fanart_poster:
+                poster = fanart_poster
 
         new_data = {
             "data": {
